@@ -641,6 +641,23 @@ app.get("/super-admin/guards", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+app.post("/isSubscribed", async (req, res) => {
+  try {
+    const token = req.cookies.token;
+    if (!token) {
+      return res.status(401).json({ error: "Unauthorized: No token provided" });
+    }
+    const user = await User.findOne({ token });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    const subscription = user.newsletter
+    res.send(subscription)
+  } catch (err) {
+    console.error("Error in isBooked:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+})
 app.get("/newsletter", async (req, res) => {
   const token = req.cookies.token;
   if (!token) {
@@ -657,6 +674,8 @@ app.get("/newsletter", async (req, res) => {
             Regards,
             CampusMate by StackMasters
         `;
+  user.newsletter = "YES";
+  await user.save();
   await SendMail(user.email, "Subscribed to CampusMate newsletter", emailBody)
 })
 app.listen(3005, () => {

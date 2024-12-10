@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoMail } from "react-icons/io5"
 import { FaLinkedin } from "react-icons/fa"
 import { NavLink } from 'react-router-dom'
 import axios from 'axios'
 
 const Footer = ({ page }) => {
+  const [subscribed, setSubscribed] = useState("NO")
+
+  useEffect(async () => {
+    const response = await axios.get("https://campus-mate.onrender.com/isSubscribed", {
+      withCredentials: true
+    })
+    console.log(response.data);
+    setSubscribed(response.data)
+  })
 
   const sendMail = async () => {
     try {
@@ -29,7 +38,7 @@ const Footer = ({ page }) => {
           <h1 className='text-[30px]'>Subscribe to our News</h1>
           <p className='w-[500px] text-gray-500 text-center'>Stay Informed and never miss a Beat.Subscribe to our Exclusive News Updates</p>
           {page != 'main' ?
-            <button className='bg-gray-800 w-[250px] h-[50px] text-white rounded-xl' onClick={sendMail}>Subscribe</button> : <p>Login First</p>}
+            (subscribed == "YES" ? <p>Already Subscribed</p> : <button className='bg-gray-800 w-[250px] h-[50px] text-white rounded-xl' onClick={sendMail}>Subscribe</button>) : <p>Login First</p>}
         </div>
       </div>
 

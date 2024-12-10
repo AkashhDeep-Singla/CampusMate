@@ -66,6 +66,11 @@ const studentSchema = new mongoose.Schema({
     token: {
         type: String
     },
+    newsletter: {
+        type: String,
+        enum: ['YES', 'NO'],
+        default: 'NO'
+    },
     messEntry: {
         type: String,
         enum: {
@@ -74,17 +79,17 @@ const studentSchema = new mongoose.Schema({
         },
         default: 'OUT'
     },
-    gateEntry:{
+    gateEntry: {
         type: String,
         enum: {
-            values: ['IN', 'OUT','IN-OUT'],
+            values: ['IN', 'OUT', 'IN-OUT'],
             message: 'Mess entry must be either IN , OUT or IN-OUT'
         },
         default: 'IN'
     },
-    img:{
-        type:String,
-        required:true
+    img: {
+        type: String,
+        required: true
     }
 }, { timestamps: true });
 

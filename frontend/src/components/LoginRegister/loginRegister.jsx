@@ -208,7 +208,6 @@ function RegisterLogin() {
                                 className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
                             />
                         </div>
-                        <a href="#">Forgot Your Password?</a>
                         <button type="submit">Sign In</button>
                     </form>
                 </div>

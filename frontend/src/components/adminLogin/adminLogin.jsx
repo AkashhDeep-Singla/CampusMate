@@ -71,7 +71,6 @@ function AdminLogin() {
                             className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-xl text-gray-500"
                         />
                     </div>
-                    <a href="#">Forget Your Password?</a>
                     <button>Sign In</button>
                 </form>
             </div>
