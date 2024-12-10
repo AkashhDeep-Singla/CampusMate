@@ -645,7 +645,7 @@ app.post("/isSubscribed", async (req, res) => {
   try {
     const token = req.cookies.token;
     if (!token) {
-      return res.status(401).json({ error: "Unauthorized: No token provided" });
+      return res.send("NO")
     }
     const user = await User.findOne({ token });
     if (!user) {

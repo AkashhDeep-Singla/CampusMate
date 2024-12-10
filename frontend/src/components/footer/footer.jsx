@@ -8,11 +8,15 @@ const Footer = ({ page }) => {
   const [subscribed, setSubscribed] = useState("NO")
 
   useEffect(async () => {
-    const response = await axios.get("https://campus-mate.onrender.com/isSubscribed", {
-      withCredentials: true
-    })
-    console.log(response.data);
-    setSubscribed(response.data)
+    try {
+      const response = await axios.get("https://campus-mate.onrender.com/isSubscribed", {
+        withCredentials: true
+      })
+      console.log(response.data);
+      setSubscribed(response.data)
+    } catch (error) {
+      console.log(error.response.data.msg);
+    }
   })
 
   const sendMail = async () => {
