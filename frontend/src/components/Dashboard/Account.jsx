@@ -18,7 +18,7 @@ const Account = () => {
           withCredentials: true,
         });
         console.log(response.data);
-        setWardenProfile(response.data.admin); 
+        setWardenProfile(response.data.admin);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -29,7 +29,7 @@ const Account = () => {
   if (!wardenProfile) {
     return (
       <div className="text-center mt-10">
-        <Loading loadingTime={2000}/>
+        <Loading loadingTime={2000} />
       </div>
     );
   }
@@ -40,9 +40,8 @@ const Account = () => {
       <Navbar isShrunk={isShrunk} />
 
       <div
-        className={`transition-all duration-300 ${
-          isShrunk ? "ml-[80px]" : "ml-[300px]"
-        } bg-gray-800 flex justify-center items-center h-[91vh]`}
+        className={`transition-all duration-300 ${isShrunk ? "ml-[80px]" : "ml-[300px]"
+          } bg-gray-800 flex justify-center items-center h-[91vh]`}
       >
         <div className="w-full max-w-lg bg-white shadow-lg rounded-lg border border-gray-300 overflow-hidden">
           <div className="flex items-center justify-between p-4 bg-pink-700">
@@ -91,12 +90,12 @@ const Account = () => {
             </div>
           </div>
           <div className="bg-gray-100 px-3 py-2 text-right">
-            <button
+            {/* <button
               onClick={() => setIsEditing(!isEditing)}
               className="bg-pink-600 text-white px-3 py-1 rounded-md shadow-md hover:bg-pink-500 transition"
             >
               {isEditing ? "Save Changes" : "Edit Profile"}
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

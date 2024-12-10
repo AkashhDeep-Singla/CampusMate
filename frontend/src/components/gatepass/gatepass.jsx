@@ -118,7 +118,6 @@ const Gatepass = () => {
         const maxInTime = new Date(2024, 0, 1, 20, 0, 0);
 
         const currentTime = new Date();
-        alert(currentTime.getTime());
 
 
         if (formData.outday === "Day Out") {
