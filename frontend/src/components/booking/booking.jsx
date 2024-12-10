@@ -91,9 +91,55 @@ const Bookings = () => {
     }
   };
 
-  const handleNextStep = () => {
-    setStep(step + 1);
+
+const handleNextStep = () => {
+  // Validation for each step
+  const validateStep = () => {
+    if (step === 1) {
+      // Validation for step 1
+      return (
+        formData.firstName.trim() !== "" &&
+        formData.lastName.trim() !== "" &&
+        formData.email.trim() !== "" &&
+        formData.enrollmentNumber.trim() !== ""
+      );
+    } else if (step === 2) {
+      // Validation for step 2
+      return (
+        formData.gender.trim() !== "" &&
+        formData.phone.trim() !== "" &&
+        formData.address.trim() !== "" &&
+        formData.city.trim() !== "" &&
+        formData.state.trim() !== "" &&
+        formData.country.trim() !== ""
+      );
+    } else if (step === 3) {
+      // Validation for step 3
+      return (
+        formData.parentname.trim() !== "" &&
+        formData.parentphone.trim() !== "" &&
+        formData.parentEmail.trim() !== ""
+      );
+    } else if (step === 4) {
+      // Validation for step 4
+      return (
+        formData.roomtype.trim() !== "" &&
+        formData.hostelname.trim() !== "" &&
+        formData.roomseater.trim() !== "" &&
+        formData.roomfloor.trim() !== "" &&
+        termsAgreed
+      );
+    }
+    return true; // Default to true for steps without validation
   };
+
+  if (validateStep()) {
+    setStep(step + 1); // Proceed to the next step if validation passes
+  } else {
+    alert("Please fill out all required fields before proceeding."); // Display error message
+  }
+};
+
 
   const handlePreviousStep = () => {
     setStep(step - 1);
