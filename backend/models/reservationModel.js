@@ -47,11 +47,13 @@ const reservationSchema = new mongoose.Schema({
     },
     city: {
         type: String,
-        required: true
+        required: true,
+        match: [/^[a-zA-Z\s]+$/, 'Can only contain alphabets and spaces']
     },
     state: {
         type: String,
-        required: true
+        required: true,
+        match: [/^[a-zA-Z\s]+$/, 'Can only contain alphabets and spaces']
     },
     country: {
         type: String,
