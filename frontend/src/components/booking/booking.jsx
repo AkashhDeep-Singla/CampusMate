@@ -136,7 +136,7 @@ const handleNextStep = () => {
   if (validateStep()) {
     setStep(step + 1); // Proceed to the next step if validation passes
   } else {
-    alert("Please fill out all required fields before proceeding."); // Display error message
+    alert("Please fill out all required fields before proceeding..");
   }
 };
 

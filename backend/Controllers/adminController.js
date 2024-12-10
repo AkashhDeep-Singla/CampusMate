@@ -18,7 +18,7 @@ const register = async (req, res) => {
     }
 
     if (/\d/.test(role)) {
-      return res.status(400).json({ msg: "Name should not contain numbers" });
+      return res.status(400).json({ msg: "Role should not contain numbers" });
     }
 
     if (/\s/.test(password)) {
