@@ -18,10 +18,9 @@ function LandingPage() {
   localStorage.removeItem("token"); // Remove from localStorage
   sessionStorage.removeItem("token"); // Remove from sessionStorage
 
-
   const [isOpen, setIsOpen] = useState(false);
   const [buttonPop, setButtonPop] = useState(false);
-  const [apiData, setApiData] = useState(null);  // State to store the API data
+  const [apiData, setApiData] = useState(null); // State to store the API data
 
   const navigate = useNavigate();
   const handleClick = () => {
@@ -38,102 +37,126 @@ function LandingPage() {
 
   // Make an API call when the component mounts
   useEffect(() => {
-      // Send request to clear cookie
-      fetch("https://campus-mate.onrender.com/clearcookie", {
-        method: "GET",
-        credentials: "include", // Include cookies with the request
+    // Send request to clear cookie
+    fetch("https://campus-mate.onrender.com/clearcookie", {
+      method: "GET",
+      credentials: "include", // Include cookies with the request
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
       })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setApiData(data);
-          console.log("Data received:", data); // Verify the response from the server
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
- 
-    
+      .then((data) => {
+        setApiData(data);
+        console.log("Data received:", data); // Verify the response from the server
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
 
     // Your GSAP animations code
-    const tl = gsap.timeline();
-    tl.to(".navbar-full", {
-      opacity: 1,
-      duration: 0.2,
-    });
-    tl.to(".nav-li", {
-      opacity: 1,
-      duration: 0.1,
-      stagger: 0.1,
-      ease: "expo.inOut",
-    });
-    tl.to(".header", {
-      opacity: 1,
-      duration: 0.1,
-    });
-    tl.to(".header-txt", {
-      opacity: 1,
-      duration: 0.1,
-      stagger: 0.1,
-    });
-    tl.to(".about__image", {
-      opacity: 1,
-      duration: 0.1,
-    });
-    tl.to(".about__content", {
-      opacity: 1,
-      duration: 0.1,
-    });
-    tl.to(".about-txt", {
-      opacity: 1,
-      duration: 0.1,
-      stagger: 0.1,
-    });
+    window.addEventListener("load", () => {
+      console.log("Hello");
+      gsap.set("body", { backgroundColor: "white" });
+      const tl = gsap.timeline();
+      tl.to(".navbar-full", {
+        opacity: 1,
+        duration: 0.2,
+      });
+      tl.to(".nav-li", {
+        opacity: 1,
+        duration: 0.1,
+        stagger: 0.1,
+        ease: "expo.inOut",
+      });
+      tl.to(".header", {
+        opacity: 1,
+        duration: 0.1,
+      });
+      tl.to(".header-txt", {
+        opacity: 1,
+        duration: 0.1,
+        stagger: 0.1,
+      });
+      tl.to(".about__image", {
+        opacity: 1,
+        duration: 0.1,
+      });
+      tl.to(".about__content", {
+        opacity: 1,
+        duration: 0.1,
+      });
+      tl.to(".about-txt", {
+        opacity: 1,
+        duration: 0.1,
+        stagger: 0.1,
+      });
 
-    gsap.to(".room__container", {
-      opacity: 1,
-      duration: 1,
-      scrollTrigger: {
-        trigger: ".room__container",
-        // markers:true,
-        start: "top 70%",
-        end: "bottom 20%",
-        scrub: 3,
-      },
+      gsap.to(".room__container", {
+        opacity: 1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: ".room__container",
+          // markers:true,
+          start: "top 70%",
+          end: "bottom 20%",
+          scrub: 3,
+        },
+      });
+      gsap.to(".service", {
+        opacity: 1,
+        scale: 1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: ".service",
+          // markers:true,
+          start: "top 80%",
+          end: "bottom 60%",
+          scrub: 3,
+        },
+      });
+      gsap.to(".banner__container", {
+        opacity: 1,
+        scale: 1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: ".banner__container",
+          // markers:true,
+          start: "top 70%",
+          end: "bottom 50%",
+          scrub: 1,
+        },
+      });
+      gsap.to("#page2 h1", {
+        transform: "translateX(-65%)",
+        // backgroundColor:"#383433",
+        duration: 5,
+        scrollTrigger: {
+          trigger: "#page2",
+          scroller: "body",
+          scrub: 5,
+          start: "top top",
+          end: "bottom bottom",
+          pin: true,
+        },
+      });
+      gsap.to("body", {
+        backgroundColor: "#383433",
+        duration: 1,
+        scrollTrigger: {
+          trigger: "#page2",
+          start: "top 20%",
+          end: "bottom bottom",
+          scrub: 3,
+        },
+      });
     });
-    gsap.to(".service", {
-      opacity: 1,
-      scale: 1,
-      duration: 1,
-      scrollTrigger: {
-        trigger: ".service",
-        // markers:true,
-        start: "top 80%",
-        end: "bottom 60%",
-        scrub: 3,
-      },
-    });
-    gsap.to(".banner__container", {
-      opacity: 1,
-      scale: 1,
-      duration: 1,
-      scrollTrigger: {
-        trigger: ".banner__container",
-        // markers:true,
-        start: "top 70%",
-        end: "bottom 50%",
-        scrub: 1,
-      },
-    });
-  }, []); // Empty dependency array ensures this runs once when the component mounts
-
+  }, []);
   return (
-    <>
-      <nav className="navbar-full opacity-0">
+    <div className="overflow-hidden">
+      <nav className="navbar-full opacity-0 overflow-hidden">
         <div className="nav__bar">
           <div className="logo">
             <a href="#">
@@ -169,7 +192,10 @@ function LandingPage() {
           </li>
         </ul>
         <div className="nav__btns">
-          <button className="btn" onClick={() => setButtonPop(true)}>
+          <button
+            className="btn bg-[#383433]"
+            onClick={() => setButtonPop(true)}
+          >
             Login
           </button>
         </div>
@@ -182,7 +208,9 @@ function LandingPage() {
           <h1 className="header-txt opacity-0">
             Make Yourself At Home
             <br />
-            In Our <span className="header-txt opacity-0">Hostels</span>.
+            In Our{" "}
+            <span className="header-txt opacity-0 text-[#383433]">Hostels</span>
+            .
           </h1>
         </div>
       </header>
@@ -208,7 +236,7 @@ function LandingPage() {
           </div>
         </div>
         <div className="about__content opacity-0">
-          <p className="section__subheader about-txt opacity-0">ABOUT US</p>
+          <p className="section__subheader about-txt opacity-0 ">ABOUT US</p>
           <h2 className="section__header about-txt opacity-0">
             The Second home away from your house!
           </h2>
@@ -219,24 +247,34 @@ function LandingPage() {
             excitement.
           </p>
           <div className="about__btn about-txt opacity-0">
-            <button className="btn about-txt opacity-0" onClick={handleClick}>
+            <button
+              className="btn bg-[#383433] about-txt opacity-0"
+              onClick={handleClick}
+            >
               Read More
             </button>
           </div>
         </div>
       </section>
 
+      <div
+        className="relative flex w-full h-screen items-end justify-start bg-transparent py-5"
+        id="page2"
+      >
+        <h1 className="text-uppercase text-[40vw] text-white mx-20">
+          CAMPUSMATE
+        </h1>
+      </div>
+
       <section
-        className="section__container room__container opacity-0"
+        className="section__container room__container opacity-0 text-white"
         id="rooms"
       >
-        <p className="section__subheader">ROOM OPTIONS AVAILABLE</p>
-        <h2 className="section__header">
+        <p className="section__subheader text-white">ROOM OPTIONS AVAILABLE</p>
+        <h2 className="section__header text-white">
           The Most Memorable Stay Time Starts Here.
         </h2>
-        <div className="room__grid">
-          {/* Room options */}
-        </div>
+        <div className="room__grid">{/* Room options */}</div>
       </section>
 
       <section className="service opacity-0 scale-0" id="service">
@@ -275,17 +313,17 @@ function LandingPage() {
       </section>
 
       <section className="section__container banner__container opacity-0 scale-0">
-        <div className="banner__content">
+        <div className="banner__content text-white">
           <div className="banner__card">
-            <h4>800+</h4>
+            <h4 className="text-white">800+</h4>
             <p>Rooms Available</p>
           </div>
           <div className="banner__card">
-            <h4>2000+</h4>
+            <h4 className="text-white">2000+</h4>
             <p>Bookings Completed</p>
           </div>
           <div className="banner__card">
-            <h4>
+            <h4 className="text-white">
               4<NavLink to="/super-admin/login">.</NavLink>6 *
             </h4>
             <p>Ratings</p>
@@ -303,7 +341,7 @@ function LandingPage() {
           Close
         </button>
       </AdminOrUser>
-    </>
+    </div>
   );
 }
 

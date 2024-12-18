@@ -62,14 +62,14 @@
     font-size: 1rem;
     font-weight: 500;
     color: var(--white);
-    background-color: var(--primary-color);
+    background-color: "#383433";
     border-radius: 5px;
     cursor: pointer;
     transition: 0.3s;
 }
 
 .btn:hover {
-    background-color: var(--primary-color-dark);
+    background-color: "#DFC9AC";
 }
 
 img {
@@ -420,7 +420,7 @@ nav {
     justify-content: space-evenly;
     flex-wrap: wrap;
     border-radius: 10px;
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 5px 5px 20px red; */
 }
 
 .banner__card {
@@ -431,7 +431,7 @@ nav {
 .banner__card h4 {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--text-dark);
+    color: white;
 }
 
 .banner__card p {

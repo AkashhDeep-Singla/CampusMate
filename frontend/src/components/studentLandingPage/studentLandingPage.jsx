@@ -10,6 +10,8 @@ import Gatepass from "../gatepass/gatepass";
 import Complaint from "../complaint/complaint";
 import { BsFillPencilFill } from "react-icons/bs";
 import axios from "axios";
+import MarqueeComponent from "../Marquee/MarqueeComponent";
+import Hero from "./hero";
 
 function StudentLandingPage() {
   const [loopNum, setLoopNum] = useState(0);
@@ -108,54 +110,70 @@ function StudentLandingPage() {
     }
   };
 
-
   if (!userData) {
     getUserData();
     checkRoomBookingStatus();
-  };
+  }
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <section className="main_page w-screen">
         <Navbar />
-        <Container className="banner w-[90%] ml-[5%]" id="home">
-          <div className="black-div"></div>
-          <div className="align-items-center">
-            <div className="user">
-              <div className="userImg">
-                <span className="tagline">
-                  Welcome Student<span id="pink-bar"></span>
-                  {userData}
-                </span>
-                <h1>
-                  {`New `}
-                  <span className="wrap">{text}</span>
-                </h1>
-                <p>
-                  We're excited to have you on board. Manage your hostel stay, check upcoming events, and stay updated with all the latest announcements. Your journey to a seamless and comfortable hostel experience begins here!
-                </p>
-                {!isRoomBooked && (
-                  <button onClick={handlePopBook} className="btn">
-                    Book Room
-                  </button>
-                )}
-              </div>
+        <div className="flex items-center justify-center w-full">
+          <div
+            className="relative h-[70vh] w-[80vw] my-[2vh] rounded-3xl overflow-hidden flex flex-col items-center gap-20 px-10"
+            style={{
+              backgroundImage: "url(/about.webp)",
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+            }}
+          >
+            <div className="w-full h-full bg-black absolute opacity-50"></div>
 
-              <div className="userName">
-                <div className="img_holder w-45 h-45 rounded-full overflow-hidden">
-                  <img
-                    src={img}
-                    className="w-full h-full object-cover border-4 border-white"
-                    alt="Profile"
-                  />
-                </div>
+            <div className="flex gap-x-10">
+              <h1 className="text-[5rem] font-bold hidden lg:block z-20 text-yellow-50">
+                Welcome<span className="text-pink-500">!</span>
+              </h1>
+              <h1 className="text-[2rem] sm:text-[3rem] md:text-[4rem] lg:text-[5rem] font-bold z-20 text-yellow-50">
+                {userData}
+              </h1>
+            </div>
+            <div className="grid grid-cols-2 gap-x-20">
+              <div className="flex flex-col items-center gap-2 md:gap-10">
+                <p className="text-xl hidden lg:block text-white z-20 font-semibold">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia
+                  non accusamus cum vel alias est repellendus sunt fugit neque
+                  libero amet quis quos, debitis quibusdam nam illum sapiente
+                  provident nesciunt?
+                </p>
+              </div>
+              <div className="flex flex-col items-center gap-20 text-white z-20 font-semibold">
+                <p className="text-xl hidden lg:block text-right">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia
+                  non accusamus cum vel alias est repellendus sunt fugit neque
+                  libero amet quis quos, debitis quibusdam nam illum sapiente
+                  provident nesciunt?
+                </p>
+                <button className="bg-pink-500 text-white h-10 px-8 rounded-3xl z-20">
+                  Book Room
+                </button>
               </div>
             </div>
-            <div></div>
+            <div className="absolute overflow-hidden w-[40vw] h-[40vw] lg:w-[25vw] lg:h-[25vw] bg-black rounded-full left-[35vw] lg:left-[35%] bottom-40 lg:-bottom-20 border-white border-8 z-20">
+              <img
+                className="w-full h-full object-cover"
+                src={img}
+                alt="Image inside circular div"
+              />
+            </div>
           </div>
-        </Container>
+        </div>
+        {/* <Hero/> */}
 
-        <section class="section__container about__container flex flex-wrap" id="gatepass">
+        <section
+          class="section__container about__container flex flex-wrap"
+          id="gatepass"
+        >
           <div class="about__content">
             <p class="section__subheader">GATEPASS</p>
             <h2 class="section__header">Ticket to go out of the Campus</h2>
@@ -176,7 +194,12 @@ function StudentLandingPage() {
           </div>
         </section>
 
-        <section class="section__container about__container flex flex-wrap" id="complaint">
+        <MarqueeComponent />
+
+        <section
+          class="section__container about__container flex flex-wrap"
+          id="complaint"
+        >
           <div class="about__image">
             <img src="/complaint.jpg" alt="about" />
           </div>
@@ -213,7 +236,6 @@ function StudentLandingPage() {
         </section>
 
         <Footer page="subpage" />
-
       </section>
 
       <div className="popForm popBook scale-0">

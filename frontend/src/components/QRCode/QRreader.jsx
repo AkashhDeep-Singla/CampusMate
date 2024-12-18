@@ -95,10 +95,10 @@ const QRScanner = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-slate-900">
+    <div className="flex flex-col items-center justify-center h-screen bg-pink-100">
       <div className="grid grid-cols-3 gap-20">
         <div className="col-span-1/3"></div>
-        <h1 className="text-3xl font-bold mb-4 text-white">QR Code Scanner</h1>
+        <h1 className="text-3xl font-bold mb-4 text-[#e82574]">QR Code Scanner</h1>
         <button className="bg-[#e82574] w-20 text-white rounded-xl mb-5 ml-20 h-10" onClick={handleLogout}>
           Logout
         </button>

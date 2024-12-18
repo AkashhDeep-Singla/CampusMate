@@ -7,7 +7,6 @@ import ProtectedRoute from "./components/ProtectedRoutes/ProtectedRoutes";
 import LandingPage from "./components/LadingPage/LandingPage";
 import About from "./components/about/about";
 import AdminOrUser from "./components/adminOrUser/adminOrUser";
-import RegisterLogin from "./components/LoginRegister/loginRegister";
 import AdminLogin from "./components/adminLogin/adminLogin";
 import StudentLandingPage from "./components/studentLandingPage/studentLandingPage";
 import Studentgatepass from "./components/studentLandingPage/Studentgatepass";
@@ -35,6 +34,8 @@ import Warden from "./components/superadmin/Dashboard/Warden";
 import GateSecurity from "./components/superadmin/Dashboard/GateSecurity";
 import GuardDetails from "./components/superadmin/Dashboard/GuardDetails";
 import Dashboard1 from "./components/superadmin/Dashboard/Dashboard1";
+import SignUp from "./components/LoginRegister/SignUp";
+import Login from "./components/LoginRegister/Login";
 
 function App() {
   return (
@@ -43,7 +44,8 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/select-user" element={<AdminOrUser />} />
-        <Route path="/student-signup" element={<RegisterLogin />} />
+        <Route path="/student-signup" element={<SignUp/>} />
+        <Route path="/student-login" element={<Login/>} />
         <Route path="/warden-signup" element={<AdminLogin />} />
         <Route path="/about" element={<About />} />
         <Route path="/super-admin/login" element={<SuperLogin />} />

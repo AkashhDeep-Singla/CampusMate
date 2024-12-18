@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faTimesCircle, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios'
+import axios from 'axios';
+import { IoArrowBack } from "react-icons/io5";
+
 
 const Studentgatepass = () => {
     const [gatepassData, setGatepassData] = useState([]);
@@ -66,9 +68,20 @@ const Studentgatepass = () => {
                 return null;
         }
     };
+    const handleBack = ()=>{
+        navigate('/student');
+    }
 
     return (
         <>
+              <div>
+                <button
+                  onClick={handleBack}
+                  className=" mb-4 px-4 py-2 bg-white text-black rounded flex items-center justify-center gap-2 absolute top-5 left-5 "
+                >
+                  <IoArrowBack /> Back
+                </button>
+              </div>
             <nav className="flex flex-col md:flex-row justify-between items-center p-4 bg-white">
                 <div className="logo mb-4 md:mb-0">
                     <a href="#"><img src="https://res.cloudinary.com/dhwaifalx/image/upload/v1732710122/logo-campusMate_m90scm.png" alt="logo" /></a>

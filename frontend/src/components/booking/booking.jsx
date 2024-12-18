@@ -159,21 +159,65 @@ const handleNextStep = () => {
       alert("You must agree to the terms and conditions.");
       return;
     }
-
+  
     try {
+      // Step 1: Send the booking form data to your backend
+      console.log(formData);
+      
       const response = await axios.post(
-        "https://campus-mate.onrender.com/reservation",
+        "https://campus-mate.onrender.com/reservation", // Your existing reservation API
         formData,
         { withCredentials: true }
       );
-      alert("Your request has been sent will let you know about the room");
-      navigate("/student/booking/payment");
+  
+      // Step 2: Initialize payment (call Razorpay backend to create order ID)
+      const paymentResponse = await axios.post("https://campus-mate.onrender.com/api/payment/create-order", {
+        amount: 50000, // Example: ₹500.00 in paise (adjust as per your requirement)
+        currency: "INR",
+        receipt: "order_rcptid_11",
+      });
+  
+      const { amount, id: order_id, currency } = paymentResponse.data;
+  
+      // Step 3: Launch Razorpay Payment Gateway
+      const options = {
+        key: "rzp_test_Hwm7AAKC5Yu1y3", // Replace with your Razorpay Key ID
+        amount: amount.toString(), // Amount is in paisa
+        currency: currency,
+        name: "CampusMate",
+        description: "Room Booking Payment",
+        order_id: order_id, // Order ID return0ed by your backend
+        handler: async function (response) {
+          // Step 4: Handle payment success
+          alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
+  
+          // Navigate to payment confirmation page
+          navigate("/student/booking/payment");
+        },
+        prefill: {
+          name: formData.firstName + " " + formData.lastName,
+          email: formData.email,
+          contact: formData.phone,
+        },
+        theme: {
+          color: "#e82574",
+        },
+      };
+  
+      const razorpay = new window.Razorpay(options);
+      razorpay.open();
+  
+      razorpay.on("payment.failed", function (response) {
+        alert("Payment Failed. Please try again.");
+        console.error(response.error);
+      });
     } catch (error) {
       console.error("Error in Booking", error);
       const errorMessage = error.response?.data?.message || "An error occurred";
       alert(errorMessage);
     }
   };
+  
 
   function handlePopClose() {
     const forms = document.getElementsByClassName("popForm");
@@ -534,6 +578,7 @@ const handleNextStep = () => {
                 </div>
               </div>
             )}
+            
           </div>
         </div>
       </div>
@@ -542,3 +587,6 @@ const handleNextStep = () => {
 };
 
 export default Bookings;
+
+
+

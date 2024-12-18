@@ -47,9 +47,9 @@ function AdminOrUser(props) {
     <div className="full">
       <div className="black_div"></div>
       <div className="popup_holder">
-        <button className="close-button">
+        {/* <button className="close-button">
           Close
-        </button>
+        </button> */}
         <div className="popup flex items-center justify-center m-3 flex-1 flex-col position-fixed">
           <div
             onClick={handleGateClick}

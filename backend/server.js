@@ -5,11 +5,13 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const SendMail = require("./helpers/mailService");
 
+
 const app = express();
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://stackmasters-campusmate.vercel.app",
+    // origin: "https://stackmasters-campusmate.vercel.app",
+    origin:"https://stackmasters-campusmate.vercel.app",
     credentials: true,
   })
 );
@@ -40,6 +42,7 @@ const qrScan = require("./routes/qr");
 
 const getQRcode = require("./helpers/qrCodeGetter");
 const messScheduler = require("./helpers/messScheduler");
+const paymentRoutes = require("./routes/paymentRoute");
 
 // const session = require('express-session');
 
@@ -54,6 +57,8 @@ app.use("/super-admin", superRoutes);
 app.use("/mess", messRoutes);
 app.use("/gateSecurity", gateSecurity);
 app.post("/qrscanner", qrScan.processQR);
+// Payment Routes
+app.use("/api/payment", paymentRoutes);
 
 messScheduler();
 

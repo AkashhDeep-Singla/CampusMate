@@ -8,11 +8,16 @@ function Navbar() {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post("https://campus-mate.onrender.com/logout", {}, { withCredentials: true });
+      const response = await axios.post(
+        "https://campus-mate.onrender.com/logout",
+        {},
+        { withCredentials: true }
+      );
 
       if (response.status === 200) {
         localStorage.clear();
         navigate("/");
+        window.location.reload();
       }
     } catch (error) {
       console.error("Logout failed:", error);
@@ -22,15 +27,18 @@ function Navbar() {
     navigate("/student/QR");
   };
   const handleMessMenu = () => {
-    navigate("/student/mess")
-  }
+    navigate("/student/mess");
+  };
   return (
     <>
       <nav>
         <div className="nav__bar">
           <div className="logo">
             <a href="#">
-              <img src="https://res.cloudinary.com/dhwaifalx/image/upload/v1732710122/logo-campusMate_m90scm.png" alt="logo" />
+              <img
+                src="https://res.cloudinary.com/dhwaifalx/image/upload/v1732710122/logo-campusMate_m90scm.png"
+                alt="logo"
+              />
             </a>
           </div>
           <div className="nav__menu__btn" id="menu-btn">

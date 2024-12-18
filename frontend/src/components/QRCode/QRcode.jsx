@@ -1,8 +1,11 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import gsap from "gsap";
+import { IoArrowBack } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 const QRcode = () => {
+  const navigate = useNavigate();
   const enrollmentID = localStorage.getItem("enrollmentID");
   const [QRurl, setQRurl] = useState(null);
   const [userData, setUserData] = useState(null);
@@ -31,6 +34,10 @@ const QRcode = () => {
     }
   };
 
+  const handleBack = () => {
+    navigate("/student");
+  };
+
   useEffect(() => {
     if (QRurl || userData) {
       gsap.to(".animated-div", { opacity: 1, duration: 1 });
@@ -40,12 +47,23 @@ const QRcode = () => {
   return (
     <div className="h-screen w-full bg-slate-900 flex flex-col items-center justify-center p-4">
       {userData == null ? (
-        <button
-          className="fetch-button mb-4 px-4 py-2 bg-white text-black rounded"
-          onClick={fetchQRCodeAndData}
-        >
-          Fetch QR Code & User Data
-        </button>
+        <div>
+          <div>
+            <button
+              onClick={handleBack}
+              className=" mb-4 px-4 py-2 bg-white text-black rounded flex items-center justify-center gap-2 absolute top-5 left-5 "
+            >
+              <IoArrowBack /> Back
+            </button>
+          </div>
+
+          <button
+            className="fetch-button mb-4 px-4 py-2 bg-white text-black rounded"
+            onClick={fetchQRCodeAndData}
+          >
+            Fetch QR Code & User Data
+          </button>
+        </div>
       ) : null}
 
       {userData == null ? null : (
@@ -80,12 +98,12 @@ const QRcode = () => {
                 </p>
               </div>
               <div className="img_holder w-45 h-45 rounded-md overflow-hidden">
-                  <img
-                    src={userData.img}
-                    className="w-full h-full object-cover"
-                    alt="Profile"
-                  />
-                </div>
+                <img
+                  src={userData.img}
+                  className="w-full h-full object-cover"
+                  alt="Profile"
+                />
+              </div>
             </div>
           ) : null}
         </div>
